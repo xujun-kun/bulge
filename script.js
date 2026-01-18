@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             counts[rgb] = (counts[rgb] || 0) + 1;
         }
 
-        const sortedColors = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        const sortedColors = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 9);
 
         colorList.innerHTML = '';
         sortedColors.forEach(([rgb]) => {
