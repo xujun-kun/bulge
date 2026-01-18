@@ -179,39 +179,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         for (let x = 0; x < canvas.width; x++) {
                             const i = (y * canvas.width + x) * 4;
 
-                            // Check UV Map zones for Body/Limbs (neck down)
-                            let isBaseLayer = false;
-                            let isOverlayLayer = false;
+                            // Check UV Zones based on user-provided map
+                            // Yellow (y < 16) is already untouched by this loop
 
-                            if (is64x64) {
-                                // 64x64 Logic
-                                const inBaseBody = (y >= 16 && y <= 31 && x >= 0 && x <= 55); // R-Leg, Body, R-Arm
-                                const inBaseLeft = (y >= 48 && y <= 63 && x >= 16 && x <= 47); // L-Leg, L-Arm
-                                isBaseLayer = inBaseBody || inBaseLeft;
+                            // Red Zone (Base Body/Limbs)
+                            const isRedBase = (is64x64) ? (
+                                (y >= 16 && y <= 31 && x >= 0 && x <= 55) || // Row 1: R-Leg, Body, R-Arm
+                                (y >= 48 && y <= 63 && x >= 16 && x <= 47)    // Row 2: L-Leg, L-Arm
+                            ) : (
+                                (y >= 16 && y <= 31 && x >= 0 && x <= 55)    // 64x32: Leg, Body, Arm
+                            );
 
-                                const inOverlayBody = (y >= 32 && y <= 47 && x >= 0 && x <= 55); // R-Leg-Ov, Body-Ov, R-Arm-Ov
-                                const inOverlayLeftLeg = (y >= 48 && y <= 63 && x >= 0 && x <= 15); // L-Leg-Ov
-                                const inOverlayLeftArm = (y >= 48 && y <= 63 && x >= 48 && x <= 63); // L-Arm-Ov
-                                isOverlayLayer = inOverlayBody || inOverlayLeftLeg || inOverlayLeftArm;
-                            } else {
-                                // 64x32 Logic
-                                isBaseLayer = (y >= 16 && y <= 31 && x >= 0 && x <= 55);
-                                isOverlayLayer = false; // 64x32 has no limb/body overlays
-                            }
-
-                            if (isOverlayLayer) {
-                                // WIPE overlays below the head
-                                pixels[i + 3] = 0;
-                            } else if (isBaseLayer) {
-                                // Fill base layers ONLY if they were not transparent (preserves the skin's shape)
+                            if (isRedBase) {
+                                // Fill Red parts (Base Layer) only where there's a pixel (preserve shape)
                                 if (pixels[i + 3] > 0) {
                                     pixels[i] = r;
                                     pixels[i + 1] = g;
                                     pixels[i + 2] = b;
-                                    pixels[i + 3] = 255;
+                                    pixels[i + 3] = 255; // Ensure solid base
                                 }
-                            } else if (y >= 16) {
-                                // Any other part of the skin below neck (unused space) should be transparent
+                            } else {
+                                // Everything else y >= 16 is "Green" (Overlay) or "Unnecessary/White"
+                                // Clear it completely
                                 pixels[i + 3] = 0;
                             }
                         }
