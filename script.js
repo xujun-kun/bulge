@@ -1,5 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const warningOverlay = document.getElementById('warning-overlay');
+    const btnProceed = document.getElementById('btn-proceed');
+    const btnLeave = document.getElementById('btn-leave');
+
+    // Check for consent
+    if (!sessionStorage.getItem('content-consent')) {
+        warningOverlay.classList.remove('hidden');
+    }
+
+    btnProceed.addEventListener('click', () => {
+        sessionStorage.setItem('content-consent', 'true');
+        warningOverlay.classList.add('hidden');
+    });
+
+    btnLeave.addEventListener('click', () => {
+        window.location.href = 'https://www.google.com';
+    });
+
     const skinInput = document.getElementById('skin-input');
+    // ... remaining variables
     const dropZone = document.getElementById('drop-zone');
     const newPreview = document.getElementById('new-skin-preview');
     const noPreview = document.getElementById('no-preview');
@@ -32,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleFile(file) {
         if (!file.type.startsWith('image/')) {
-            showStatus('画像ファイルを選択してください。', 'error');
+            showStatus('Please select an image file.', 'error');
             return;
         }
 
@@ -43,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Minecraft skin size validation (64x64 or 64x32)
                 const isCorrectSize = (img.width === 64 && (img.height === 64 || img.height === 32));
                 if (!isCorrectSize) {
-                    showStatus(`サイズが正しくありません(${img.width}x${img.height})。マインクラフトのスキン(64x64 または 64x32)を選択してください。`, 'error');
+                    showStatus(`Incorrect size (${img.width}x${img.height}). Please select a Minecraft skin (64x64 or 64x32).`, 'error');
                 }
 
                 selectedFile = file;
@@ -53,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 downloadBtn.disabled = false;
 
                 if (isCorrectSize) {
-                    showStatus('スキンのプレビューを更新しました。', 'success');
+                    showStatus('Skin preview updated.', 'success');
                 }
             };
             img.src = e.target.result;
@@ -66,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!selectedFile) return;
 
         try {
-            showStatus('画像を合成中...', 'success');
+            showStatus('Compositing images...', 'success');
 
             // 1. Load Base Image (Uploaded Skin)
             const baseImg = new Image();
@@ -81,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlayImg.onload = resolve;
                 overlayImg.onerror = (e) => {
                     console.error('Failed to load overlay:', e);
-                    reject('assets/black_brief.png の読み込みに失敗しました。ファイルが存在するか確認してください。');
+                    reject('Failed to load assets/black_brief.png. Please check if the file exists.');
                 };
             });
             overlayImg.src = 'assets/black_brief.png?t=' + Date.now(); // Cache busting
@@ -109,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
 
-                showStatus('レイヤーを合成して保存しました！これを assets/black_brief.png にリネームして上書きしてください。', 'success');
+                showStatus('Layers composited and saved! Rename it to black_brief.png and overwrite the original.', 'success');
             }, 'image/png');
 
         } catch (err) {

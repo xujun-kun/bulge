@@ -1,59 +1,55 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skin Overwriter | Premium Minecraft Tools</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <title>Minecraft Skin Overwriter</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
+    <div id="warning-overlay" class="warning-overlay hidden">
+        <div class="warning-modal">
+            <h2>CONTENT WARNING</h2>
+            <p>This site may contain content related to male underwear and gay elements. Do you wish to proceed?</p>
+            <div class="btns">
+                <button id="btn-proceed" class="btn">PROCEED</button>
+                <button id="btn-leave" class="btn">LEAVE</button>
+            </div>
+        </div>
+    </div>
     <div class="container">
-        <h1>Skin Overwriter</h1>
-        <p class="subtitle">マインクラフトスキンのプレビューと更新準備</p>
+        <header>
+            <h1>SKIN <span>OVERWRITER</span></h1>
+        </header>
 
-        <div class="preview-grid">
-            <div class="preview-card">
-                <h3>Current Skin</h3>
-                <div class="skin-view">
-                    <img id="current-skin" src="assets/black_brief.png" alt="Current Skin"
-                        onerror="this.style.opacity='0.3';">
-                </div>
+        <div class="subtitle-banner">
+            <p class="subtitle">Minecraft Skin Compositing Tool</p>
+        </div>
+
+        <div class="tool-section">
+            <div class="upload-zone" id="drop-zone">
+                <p>Select your base skin (Drag & Drop or Click)</p>
+                <input type="file" id="skin-input" accept="image/png">
             </div>
-            <div class="preview-card">
-                <h3>New Skin</h3>
-                <div class="skin-view">
-                    <img id="new-skin-preview" src="" alt="New Skin Preview" class="hidden">
-                    <div id="no-preview" style="color: var(--text-dim); font-size: 0.8rem;">未選択</div>
-                </div>
+
+            <div class="actions">
+                <button id="download-btn" class="btn" disabled>
+                    DOWNLOAD RESULT
+                </button>
             </div>
+
+            <div id="status" class="status-msg hidden"></div>
         </div>
 
-        <div class="upload-zone" id="drop-zone">
-            <p>新しいスキンをドラッグ＆ドロップ、またはクリックして選択</p>
-            <input type="file" id="skin-input" accept="image/png">
-        </div>
-
-        <div class="actions">
-            <button id="download-btn" class="btn btn-primary" disabled>
-                black_brief.png として保存
-            </button>
-        </div>
-
-        <div id="status" class="status-msg hidden"></div>
-
-        <div class="instruction">
-            <strong>💡 手順:</strong><br>
-            1. スキンを選択してプレビューを確認します。<br>
-            2. ボタンを押して <code>black_brief.png</code> という名前で保存します。<br>
-            3. 保存したファイルをプロジェクトの <code>assets/</code> フォルダに上書きしてコミットしてください。
+        <div class="instruction-box">
+            <strong>GUIDE</strong>
+            <p>1. [SELECT BASE SKIN] Choose your base skin image.</p>
+            <p>2. [PREVIEW RESULT] Check the composited result above.</p>
+            <p>3. [DOWNLOAD] Save the composited image.</p>
+            <p>4. [OVERWRITE] Overwrite assets/black_brief.png with the new file.</p>
         </div>
     </div>
 </body>
