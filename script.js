@@ -33,6 +33,30 @@ document.addEventListener('DOMContentLoaded', () => {
     let baseImageData = null;
     let selectedFillColor = null;
 
+    // Handle manual hex input
+    const manualHex = document.getElementById('manual-hex');
+    if (manualHex) {
+        manualHex.addEventListener('input', (e) => {
+            const hex = e.target.value;
+            // Validate Hex code (e.g. #FFFFFF or #FFF)
+            if (/^#([0-9A-F]{3}){1,2}$/i.test(hex)) {
+                let r, g, b;
+                if (hex.length === 4) {
+                    r = parseInt(hex[1] + hex[1], 16);
+                    g = parseInt(hex[2] + hex[2], 16);
+                    b = parseInt(hex[3] + hex[3], 16);
+                } else {
+                    r = parseInt(hex.slice(1, 3), 16);
+                    g = parseInt(hex.slice(3, 5), 16);
+                    b = parseInt(hex.slice(5, 7), 16);
+                }
+                selectedFillColor = [r, g, b];
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+                showStatus('Custom color selected!', 'success');
+            }
+        });
+    }
+
     // Handle file selection
     if (skinInput) {
         skinInput.addEventListener('change', (e) => {
@@ -100,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             counts[rgb] = (counts[rgb] || 0) + 1;
         }
 
-        const sortedColors = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 12);
+        const sortedColors = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
 
         colorList.innerHTML = '';
         sortedColors.forEach(([rgb]) => {
