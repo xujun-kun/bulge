@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Overwriter | Premium Minecraft Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Skin Overwriter</h1>
+        <p class="subtitle">マインクラフトスキンのプレビューと更新準備</p>
+
+        <div class="preview-grid">
+            <div class="preview-card">
+                <h3>Current Skin</h3>
+                <div class="skin-view">
+                    <img id="current-skin" src="assets/black_brief.png" alt="Current Skin"
+                        onerror="this.style.opacity='0.3';">
+                </div>
+            </div>
+            <div class="preview-card">
+                <h3>New Skin</h3>
+                <div class="skin-view">
+                    <img id="new-skin-preview" src="" alt="New Skin Preview" class="hidden">
+                    <div id="no-preview" style="color: var(--text-dim); font-size: 0.8rem;">未選択</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-zone" id="drop-zone">
+            <p>新しいスキンをドラッグ＆ドロップ、またはクリックして選択</p>
+            <input type="file" id="skin-input" accept="image/png">
+        </div>
+
+        <div class="actions">
+            <button id="download-btn" class="btn btn-primary" disabled>
+                black_brief.png として保存
+            </button>
+        </div>
+
+        <div id="status" class="status-msg hidden"></div>
+
+        <div class="instruction">
+            <strong>💡 手順:</strong><br>
+            1. スキンを選択してプレビューを確認します。<br>
+            2. ボタンを押して <code>black_brief.png</code> という名前で保存します。<br>
+            3. 保存したファイルをプロジェクトの <code>assets/</code> フォルダに上書きしてコミットしてください。
+        </div>
+    </div>
+</body>
+
+</html>
