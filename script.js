@@ -149,17 +149,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     const [r, g, b] = selectedFillColor;
                     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                     const pixels = imgData.data;
+                    const is64x64 = canvas.height === 64;
 
-                    // MC Skin: Head and Overlay Head are in top 16px (y: 0 - 15)
-                    // We fill everything from y=16 onwards
                     for (let y = 16; y < canvas.height; y++) {
                         for (let x = 0; x < canvas.width; x++) {
                             const i = (y * canvas.width + x) * 4;
-                            // If not fully transparent, overwrite with selected color
-                            if (pixels[i + 3] > 0) {
-                                pixels[i] = r;
-                                pixels[i + 1] = g;
-                                pixels[i + 2] = b;
+
+                            // Check if this (x,y) is a Base Layer or Overlay Layer for the body
+                            let isBase = false;
+                            let isOverlay = false;
+
+                            if (is64x64) {
+                                // 64x64 Base Zones (excluding head)
+                                if ((y >= 16 && y <= 31 && x >= 0 && x <= 55) || // R-Leg, Body, R-Arm
+                                    (y >= 48 && y <= 63 && x >= 16 && x <= 47)) { // L-Leg, L-Arm
+                                    isBase = true;
+                                }
+                                // 64x64 Overlay Zones (excluding head)
+                                if ((y >= 32 && y <= 47 && x >= 0 && x <= 55) || // R-Leg-Ov, Body-Ov, R-Arm-Ov
+                                    (y >= 48 && y <= 63 && x >= 0 && x <= 15) || // L-Leg-Ov
+                                    (y >= 48 && y <= 63 && x >= 48 && x <= 63)) { // L-Arm-Ov
+                                    isOverlay = true;
+                                }
+                            } else {
+                                // 64x32 Base Zones (excluding head)
+                                if (y >= 16 && y <= 31 && x >= 0 && x <= 55) {
+                                    isBase = true;
+                                }
+                                // 64x32 has no body overlays
+                            }
+
+                            if (isBase) {
+                                // Fill base layers (only if they weren't fully transparent before, or just always?)
+                                // Most users want to overwrite previous clothing shape. 
+                                // We check alpha > 0 to maintain the character's unique shape if any.
+                                if (pixels[i + 3] > 0) {
+                                    pixels[i] = r;
+                                    pixels[i + 1] = g;
+                                    pixels[i + 2] = b;
+                                }
+                            } else if (isOverlay) {
+                                // WIPE body overlays
+                                pixels[i + 3] = 0;
                             }
                         }
                     }
