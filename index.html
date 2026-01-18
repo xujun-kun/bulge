@@ -13,7 +13,8 @@
     <div id="warning-overlay" class="warning-overlay hidden">
         <div class="warning-modal">
             <h2>CONTENT WARNING</h2>
-            <p>This site may contain content related to male underwear and gay elements. Do you wish to proceed?</p>
+            <p>This site may contain content related to male underwear, gay elements, and moderate sexual themes. Do you
+                wish to proceed?</p>
             <div class="btns">
                 <button id="btn-proceed" class="btn">PROCEED</button>
                 <button id="btn-leave" class="btn">LEAVE</button>
@@ -22,22 +23,24 @@
     </div>
     <div class="container">
         <header>
-            <h1>Take it off for me</h1>
+            <img src="assets/logo.png" alt="Logo" class="main-logo">
         </header>
-
-        <div class="subtitle-banner">
-            <p class="subtitle">Strip to Briefs: Male Skin Tool</p>
-        </div>
 
         <div class="main-layout">
             <div class="sample-section">
                 <div class="sample-card">
                     <h3>EXAMPLE RESULT</h3>
                     <div class="sample-image-wrapper">
-                        <img src="assets/example/black_brief_example.png" alt="Black Brief Example"
+                        <img id="sample-result-image" src="assets/example/nacked.png" alt="Skin Example"
                             class="sample-image">
                     </div>
                     <p class="sample-caption">What your skin will look like</p>
+                </div>
+                <div class="license-info">
+                    <p>All rights reserved</p>
+                    <p>Created by XuJun</p>
+                    <p class="privacy-note">Files are processed locally on your computer, not on our servers. Use with
+                        confidence.</p>
                 </div>
             </div>
 
@@ -50,13 +53,19 @@
                 <div class="overlay-selection">
                     <h4>SELECT OVERLAY TYPE</h4>
                     <div class="overlay-options">
-                        <button class="overlay-btn active" data-overlay="black_brief.png">BLACK BRIEF</button>
-                        <button class="overlay-btn" data-overlay="white_fundoshi.png">WHITE FUNDOSHI</button>
+                        <button class="overlay-btn" data-overlay="black_brief.png"
+                            data-example="assets/example/black_brief_example.png">BLACK BRIEF</button>
+                        <button class="overlay-btn" data-overlay="purple_brief.png"
+                            data-example="assets/example/purple_brief_example.png">PURPLE BRIEF</button>
+                        <button class="overlay-btn" data-overlay="white_fundoshi.png"
+                            data-example="assets/example/white_fundoshi_example.png">WHITE FUNDOSHI</button>
+                        <button class="overlay-btn" data-overlay="diaper.png"
+                            data-example="assets/example/diaper_example.png">DIAPER</button>
                     </div>
                 </div>
 
                 <div id="color-section" class="color-analysis-section hidden">
-                    <h4>SELECT COLOR TO FILL PARTS (EXCEPT HEAD)</h4>
+                    <h4>SELECT COLOR TO SKIN TONE (EXCEPT HEAD)</h4>
                     <div id="color-list" class="color-list"></div>
                     <div class="manual-color-input">
                         <span>OR ENTER HEX:</span>
@@ -74,11 +83,10 @@
 
                 <div class="instruction-box">
                     <strong>GUIDE</strong>
-                    <p>1. [SELECT BASE SKIN] Choose your base skin image.</p>
-                    <p>2. [PREVIEW RESULT] Check the composited result above.</p>
-                    <p>3. [DOWNLOAD] Save the composited image.</p>
-                    <p>[*OVERWRITE] Overwrite assets/skin/<span id="guide-filename">black_brief.png</span> with the new
-                        file.</p>
+                    <p>1. <strong>SELECT YOUR STUD</strong> - Pick your handsome base skin.</p>
+                    <p>2. <strong>CHOOSE YOUR STYLE</strong> - Pick your style.</p>
+                    <p>3. <strong>MATCH HIS SKIN</strong> - Choose the perfect skin tone.</p>
+                    <p>4. <strong>ENJOY!</strong> - You're ready. Stripped and hot!</p>
                 </div>
             </div>
         </div>

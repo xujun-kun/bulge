@@ -32,21 +32,34 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedFile = null;
     let baseImageData = null;
     let selectedFillColor = null;
-    let selectedOverlay = 'black_brief.png';
+    let selectedOverlay = null; // Initialized as null
 
     // Handle overlay selection
     const overlayBtns = document.querySelectorAll('.overlay-btn');
     const guideFilename = document.getElementById('guide-filename');
+
+    const sampleResultImage = document.getElementById('sample-result-image');
 
     overlayBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             overlayBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             selectedOverlay = btn.dataset.overlay;
+
+            // Update sample image
+            if (sampleResultImage && btn.dataset.example) {
+                sampleResultImage.src = btn.dataset.example;
+            }
+
             if (guideFilename) {
                 guideFilename.textContent = selectedOverlay;
             }
             showStatus(`Overlay switched to ${btn.textContent}!`, 'success');
+
+            // Re-check download button if file is already loaded
+            if (selectedFile) {
+                downloadBtn.disabled = false;
+            }
         });
     });
 
@@ -111,7 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 selectedFile = file;
                 baseImageData = e.target.result;
-                downloadBtn.disabled = false;
+                // Only enable download if overlay is selected
+                downloadBtn.disabled = !selectedOverlay;
                 selectedFillColor = null; // Reset selection
 
                 analyzeColors(img);
@@ -163,7 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Download functionality
     if (downloadBtn) {
         downloadBtn.addEventListener('click', async () => {
-            if (!selectedFile || !baseImageData) return;
+            if (!selectedFile || !baseImageData || !selectedOverlay) {
+                showStatus('Please select an overlay type.', 'error');
+                return;
+            }
 
             try {
                 showStatus('Processing skin...', 'success');
@@ -232,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = 'composited_skin.png';
+                    a.download = 'HotGuy.png';
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);

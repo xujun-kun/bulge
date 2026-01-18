@@ -44,27 +44,15 @@ body::before {
     text-align: center;
 }
 
-header h1 {
-    font-size: 48px;
-    text-shadow: 4px 4px 0px var(--mc-text-shadow);
-    margin-bottom: 30px;
-    letter-spacing: 2px;
+header {
+    margin-bottom: 20px;
 }
 
-header h1 span {
-    color: #55ff55;
-}
-
-.subtitle-banner {
-    margin-bottom: 40px;
-}
-
-.subtitle {
-    font-size: 24px;
-    background: #333333;
-    padding: 10px;
-    border: none;
-    letter-spacing: 1px;
+.main-logo {
+    max-width: 100%;
+    height: auto;
+    max-height: 180px;
+    image-rendering: pixelated;
 }
 
 .preview-grid {
@@ -204,23 +192,33 @@ header h1 span {
 }
 
 .instruction-box {
-    background: rgba(0, 0, 0, 0.85);
-    border: 3px solid #3333ff;
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #4a5a7a;
     padding: 20px;
     text-align: left;
     margin-top: 20px;
 }
 
 .instruction-box strong {
-    color: #3333ff;
+    color: var(--mc-grey);
     font-size: 24px;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .instruction-box p {
-    margin: 5px 0;
+    margin: 8px 0;
     font-size: 18px;
+    color: var(--mc-grey);
+}
+
+.instruction-box p strong {
+    display: inline;
+    color: var(--mc-highlight);
+    font-size: inherit;
+    margin-right: 5px;
 }
 
 /* Warning Modal Styles */
@@ -299,6 +297,7 @@ header h1 span {
 
 .overlay-options {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
 }
@@ -374,6 +373,9 @@ header h1 span {
 /* Sample Section Styles */
 .sample-section {
     flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sample-card {
@@ -417,6 +419,29 @@ header h1 span {
     font-size: 16px;
     margin: 0;
     font-style: italic;
+}
+
+.license-info {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--mc-grey);
+    font-size: 14px;
+    line-height: 1.5;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--mc-dark-grey);
+    padding: 10px;
+    width: 260px;
+    box-sizing: border-box;
+}
+
+.license-info p {
+    margin: 2px 0;
+}
+
+.privacy-note {
+    font-size: 18px;
+    color: var(--mc-highlight);
+    margin-top: 10px !important;
 }
 
 /* Responsive Layout */
