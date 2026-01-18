@@ -273,6 +273,48 @@ header h1 span {
     font-size: 18px;
 }
 
+.color-analysis-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--mc-dark-grey);
+}
+
+.color-analysis-section h4 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: var(--mc-grey);
+}
+
+.color-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.color-swatch {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--mc-outline);
+    border-top-color: var(--mc-highlight);
+    border-left-color: var(--mc-highlight);
+    border-right-color: var(--mc-shadow);
+    border-bottom-color: var(--mc-shadow);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+    border-color: var(--mc-highlight);
+}
+
+.color-swatch.active {
+    border: 3px solid #55ff55 !important;
+    transform: scale(1.1);
+}
+
 .hidden {
     display: none !important;
 }
