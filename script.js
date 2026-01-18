@@ -167,58 +167,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 canvas.width = baseImg.width;
                 canvas.height = baseImg.height;
 
-                // 1. Draw modified base (Fill parts except head)
+                // 1. Process Base Skin
                 ctx.drawImage(baseImg, 0, 0);
                 if (selectedFillColor) {
                     const [r, g, b] = selectedFillColor;
-                    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                    const pixels = imgData.data;
                     const is64x64 = canvas.height === 64;
 
-                    for (let y = 16; y < canvas.height; y++) {
-                        for (let x = 0; x < canvas.width; x++) {
-                            const i = (y * canvas.width + x) * 4;
+                    // Wipe everything below the head (y >= 16)
+                    ctx.clearRect(0, 16, canvas.width, canvas.height - 16);
+                    ctx.fillStyle = `rgb(${r},${g},${b})`;
 
-                            // Check if this (x,y) is a Base Layer or Overlay Layer for the body
-                            let isBase = false;
-                            let isOverlay = false;
-
-                            if (is64x64) {
-                                // 64x64 Base Zones (excluding head)
-                                if ((y >= 16 && y <= 31 && x >= 0 && x <= 55) || // R-Leg, Body, R-Arm
-                                    (y >= 48 && y <= 63 && x >= 16 && x <= 47)) { // L-Leg, L-Arm
-                                    isBase = true;
-                                }
-                                // 64x64 Overlay Zones (excluding head)
-                                if ((y >= 32 && y <= 47 && x >= 0 && x <= 55) || // R-Leg-Ov, Body-Ov, R-Arm-Ov
-                                    (y >= 48 && y <= 63 && x >= 0 && x <= 15) || // L-Leg-Ov
-                                    (y >= 48 && y <= 63 && x >= 48 && x <= 63)) { // L-Arm-Ov
-                                    isOverlay = true;
-                                }
-                            } else {
-                                // 64x32 Base Zones (excluding head)
-                                if (y >= 16 && y <= 31 && x >= 0 && x <= 55) {
-                                    isBase = true;
-                                }
-                                // 64x32 has no body overlays
-                            }
-
-                            if (isBase) {
-                                // Fill base layers (only if they weren't fully transparent before, or just always?)
-                                // Most users want to overwrite previous clothing shape. 
-                                // We check alpha > 0 to maintain the character's unique shape if any.
-                                if (pixels[i + 3] > 0) {
-                                    pixels[i] = r;
-                                    pixels[i + 1] = g;
-                                    pixels[i + 2] = b;
-                                }
-                            } else if (isOverlay) {
-                                // WIPE body overlays
-                                pixels[i + 3] = 0;
-                            }
-                        }
+                    if (is64x64) {
+                        // 64x64 Format: Draw standard base body part rectangles
+                        ctx.fillRect(0, 16, 16, 16);   // Right Leg
+                        ctx.fillRect(16, 16, 24, 16);  // Body
+                        ctx.fillRect(40, 16, 16, 16);  // Right Arm
+                        ctx.fillRect(16, 48, 16, 16);  // Left Leg
+                        ctx.fillRect(32, 48, 16, 16);  // Left Arm
+                    } else {
+                        // 64x32 Format: Draw standard base body part rectangles
+                        ctx.fillRect(0, 16, 16, 16);   // Leg
+                        ctx.fillRect(16, 16, 24, 16);  // Body
+                        ctx.fillRect(40, 16, 16, 16);  // Arm
                     }
-                    ctx.putImageData(imgData, 0, 0);
                 }
 
                 // 2. Draw black_brief overlay
