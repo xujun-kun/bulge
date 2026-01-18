@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await new Promise((res, rej) => {
                     overlayImg.onload = res;
                     overlayImg.onerror = rej;
-                    overlayImg.src = 'assets/black_brief.png?t=' + Date.now();
+                    overlayImg.src = 'assets/skin/black_brief.png?t=' + Date.now();
                 });
 
                 const canvas = document.createElement('canvas');
