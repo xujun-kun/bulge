@@ -32,6 +32,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedFile = null;
     let baseImageData = null;
     let selectedFillColor = null;
+    let selectedOverlay = 'black_brief.png';
+
+    // Handle overlay selection
+    const overlayBtns = document.querySelectorAll('.overlay-btn');
+    const guideFilename = document.getElementById('guide-filename');
+
+    overlayBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            overlayBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedOverlay = btn.dataset.overlay;
+            if (guideFilename) {
+                guideFilename.textContent = selectedOverlay;
+            }
+            showStatus(`Overlay switched to ${btn.textContent}!`, 'success');
+        });
+    });
 
     // Handle manual hex input
     const manualHex = document.getElementById('manual-hex');
@@ -159,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await new Promise((res, rej) => {
                     overlayImg.onload = res;
                     overlayImg.onerror = rej;
-                    overlayImg.src = 'assets/skin/black_brief.png?t=' + Date.now();
+                    overlayImg.src = `assets/skin/${selectedOverlay}?t=` + Date.now();
                 });
 
                 const canvas = document.createElement('canvas');

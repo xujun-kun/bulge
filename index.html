@@ -47,6 +47,14 @@
                     <input type="file" id="skin-input" accept="image/png">
                 </div>
 
+                <div class="overlay-selection">
+                    <h4>SELECT OVERLAY TYPE</h4>
+                    <div class="overlay-options">
+                        <button class="overlay-btn active" data-overlay="black_brief.png">BLACK BRIEF</button>
+                        <button class="overlay-btn" data-overlay="white_fundoshi.png">WHITE FUNDOSHI</button>
+                    </div>
+                </div>
+
                 <div id="color-section" class="color-analysis-section hidden">
                     <h4>SELECT COLOR TO FILL PARTS (EXCEPT HEAD)</h4>
                     <div id="color-list" class="color-list"></div>
@@ -69,7 +77,8 @@
                     <p>1. [SELECT BASE SKIN] Choose your base skin image.</p>
                     <p>2. [PREVIEW RESULT] Check the composited result above.</p>
                     <p>3. [DOWNLOAD] Save the composited image.</p>
-                    <p>[*OVERWRITE] Overwrite assets/skin/black_brief.png with the new file.</p>
+                    <p>[*OVERWRITE] Overwrite assets/skin/<span id="guide-filename">black_brief.png</span> with the new
+                        file.</p>
                 </div>
             </div>
         </div>
