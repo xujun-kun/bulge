@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (guideFilename) {
                 guideFilename.textContent = selectedOverlay;
             }
-            showStatus(`Overlay switched to ${btn.textContent}!`, 'success');
+            showStatus(`Style switched to ${btn.textContent}!`, 'success');
 
             // Re-check download button if file is already loaded
             if (selectedFile) {
