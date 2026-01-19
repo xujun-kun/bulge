@@ -282,7 +282,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!status) return;
         status.textContent = msg;
         status.className = `status-msg ${type}`;
-        status.classList.remove('hidden');
-        setTimeout(() => { status.classList.add('hidden'); }, 5000);
+
+        // Remove text after delay but keep the element visible with a default message
+        setTimeout(() => {
+            status.textContent = 'AWAITING SELECTION...';
+            status.className = 'status-msg';
+        }, 5000);
     }
 });
