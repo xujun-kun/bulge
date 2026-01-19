@@ -444,6 +444,13 @@ header {
     margin-top: 10px !important;
 }
 
+.model-name {
+    color: #404040;
+    font-size: 20px;
+    margin: 5px 0 0 0;
+    font-weight: bold;
+}
+
 /* Responsive Layout */
 @media (max-width: 800px) {
     .main-layout {

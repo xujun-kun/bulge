@@ -39,6 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideFilename = document.getElementById('guide-filename');
 
     const sampleResultImage = document.getElementById('sample-result-image');
+    const modelNameElement = document.querySelector('.model-name');
+
+    const modelNameMap = {
+        'black_brief.png': '徐军 XúJūn',
+        'white_fundoshi.png': '徐军 XúJūn',
+        'purple_brief.png': '徐紫毅 Xú Zǐyì',
+        'nacked.png': '徐军 XúJūn'
+    };
 
     overlayBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -49,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update sample image
             if (sampleResultImage && btn.dataset.example) {
                 sampleResultImage.src = btn.dataset.example;
+            }
+
+            // Update model name
+            if (modelNameElement) {
+                const modelName = modelNameMap[selectedOverlay] || 'TEST';
+                modelNameElement.textContent = `Model: ${modelName}`;
             }
 
             if (guideFilename) {
