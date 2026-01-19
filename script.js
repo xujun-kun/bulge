@@ -43,12 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modelNameMap = {
         // 徐军 徐紫毅 雷霆
-        'black_brief.png': 'XúJūn',
-        'white_fundoshi.png': 'XúJūn',
-        'purple_brief.png': 'XúZiyì',
-        'diaper.png': 'XúJūn',
-        'darkblue_brief.png': 'LéiTíng',
-        'nacked.png': 'XúJūn'
+        'black_brief.png':'XúJūn',
+        'white_fundoshi.png':'XúJūn',
+        'purple_brief.png':'XúZiyì',
+        'diaper.png':'XúJūn',
+        'darkblue_brief.png':'LéiTíng',
+        'nacked.png':'XúJūn'
     };
 
     overlayBtns.forEach(btn => {
