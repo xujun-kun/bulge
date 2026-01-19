@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 analyzeColors(img);
 
                 if (isCorrectSize) {
-                    showStatus('Skin loaded. Pick a color to fill parts.', 'success');
+                    showStatus('Skin loaded. Pick a color.', 'success');
                 }
             };
             img.src = e.target.result;
