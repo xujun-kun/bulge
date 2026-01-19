@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modelNameMap = {
         'black_brief.png': '徐军 XúJūn',
         'white_fundoshi.png': '徐军 XúJūn',
-        'purple_brief.png': '徐紫毅 Xú Zǐyì',
+        'purple_brief.png': '徐紫毅 XúZǐyì',
         'nacked.png': '徐军 XúJūn'
     };
 
