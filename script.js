@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modelNameElement = document.querySelector('.model-name');
 
     const modelNameMap = {
-        'black_brief.png': '徐军 XúJūn',
-        'white_fundoshi.png': '徐军 XúJūn',
-        'purple_brief.png': '徐紫毅 XúZǐyì',
-        'nacked.png': '徐军 XúJūn'
+        'black_brief.png': 'XúJūn',
+        'white_fundoshi.png': 'XúJūn',
+        'purple_brief.png': 'XúZǐyì',
+        'nacked.png': 'XúJūn'
     };
 
     overlayBtns.forEach(btn => {
