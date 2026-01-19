@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'black_brief.png': 'XúJūn',
         'white_fundoshi.png': 'XúJūn',
         'purple_brief.png': 'XúZǐyì',
+        'diaper.png': 'XúJūn',
         'nacked.png': 'XúJūn'
     };
 
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update model name
             if (modelNameElement) {
-                const modelName = modelNameMap[selectedOverlay] || 'TEST';
+                const modelName = modelNameMap[selectedOverlay] || 'XúJūn';
                 modelNameElement.textContent = `Model: ${modelName}`;
             }
 
